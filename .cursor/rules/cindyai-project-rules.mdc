@@ -1,0 +1,48 @@
+---
+description: Always follow these rules for CindyAI project
+globs: 
+alwaysApply: false
+---
+# Project Rules for FastAPI (Backend) & Vue.js (Frontend)
+
+## General Guidelines
+- **Write clear and concise code** → Easy to debug and modify.
+- **Follow modular structure** → Keep things reusable and organized.
+- **Use consistent naming conventions**:
+  - Python → `snake_case`
+  - JavaScript/Vue → `camelCase`
+- **Minimize unnecessary comments** → Explain only complex logic.
+- **Handle errors properly** → Avoid silent failures.
+- Before installing any python packages, make sure you are inside virtual environment ( don't install globally)
+
+---
+
+## FastAPI (Backend) Rules
+- Follow **PEP8** coding style.
+- Use **Black** for auto-formatting (`pip install black`).
+- Write **async functions** for better performance.
+- Use **environment variables (`.env`)** for sensitive data.
+- Handle errors with **FastAPI’s exception handling**.
+
+---
+
+## Vue.js (Frontend) Rules
+- Follow Vue 3 **Composition API** (`<script setup>`).
+- Keep components **small and reusable**.
+- Use **Pinia** for state management instead of Vuex.
+- Handle API calls inside a **`services/` folder**.
+- Use **TypeScript (if possible)** for better type safety.
+- Install and use **ESLint + Prettier** for formatting.
+- Use shadcn for styling
+
+---
+
+## Additional Best Practices
+- Use **`.env` files** for configurations.
+- Set up **Git hooks** to enforce clean code (`pre-commit install`).
+- Use **Docker** (if needed) to containerize services.
+
+---
+
+✔️ Keep the project **simple and maintainable**  
+✔️ Follow **best practices** for debugging and future modifications  
