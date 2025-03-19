@@ -175,7 +175,9 @@ function scrollToBottom() {
 
 async function handleSendMessage(message: string) {
   try {
-    await chatStore.sendMessage(message)
+    const videoId = route.params.contentId as string;
+    
+    await chatStore.sendMessage(message, videoId)
   } catch (error) {
     console.error('Failed to send message:', error)
     // TODO: Show error toast

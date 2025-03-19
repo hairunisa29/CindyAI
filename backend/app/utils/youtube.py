@@ -32,7 +32,8 @@ class YouTubeTranscriptExtractor:
         """Extract video ID from a YouTube URL."""
         try:
             with yt_dlp.YoutubeDL({'quiet': True}) as ydl:
-                return ydl.extract_info(video_url, download=False).get("id")
+                info = ydl.extract_info(video_url, download=False)
+                return info.get("id")
         except Exception as e:
             logger.error(f"Error getting video ID: {e}")
             return None

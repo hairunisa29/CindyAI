@@ -83,9 +83,10 @@ export const chatApi = {
     return response.data
   },
 
-  async sendMessage(chatId: number, message: string): Promise<ChatResponse> {
+  async sendMessage(chatId: number, message: string, videoId?: string): Promise<ChatResponse> {
     const response = await api.post(`/chat/${chatId}/message`, {
-      message: message
+      message: message,
+      video_id: videoId
     })
     return response.data
   },

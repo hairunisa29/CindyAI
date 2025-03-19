@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Body
 from sqlalchemy.orm import Session
 from ....db.session import get_db
@@ -42,11 +42,14 @@ async def send_message(
     chat_id: int,
     *,
     message: str = Body(..., embed=True),
+    video_id: Optional[str] = Body(None, embed=True),
     db: Session = Depends(get_db)
 ) -> ChatResponse:
     """
     Send a message in a chat and get AI response.
+    Optionally provide a video_id to contextualize the response to a specific video.
     """
+    print("video_id from chat.py endpoints", video_id)
     chat = ChatService(db).get_chat(chat_id)
     if not chat:
         raise HTTPException(
@@ -54,5 +57,5 @@ async def send_message(
             detail="Chat not found"
         )
     
-    response = await ChatService(db).process_message(chat_id, message)
-    return ChatResponse(**response) 
+    response = await ChatService(db).process_message(chat_id, message, video_id)
+    return ChatResponse(**response)

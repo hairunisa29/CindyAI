@@ -25,6 +25,26 @@ async def create_youtube_content(
     try:
         logger.debug(f"Processing YouTube video: {video_url}")
         
+        # First, check if this exact URL already exists in the database
+        existing_content = ContentService(db).get_by_youtube_url(video_url)
+        if existing_content:
+            logger.info(f"Video URL {video_url} already exists in database, returning existing content")
+            return existing_content
+        
+        # Extract video ID
+        video_id = youtube.get_video_id(video_url)
+        if not video_id:
+            raise HTTPException(
+                status_code=400,
+                detail="Could not extract video ID from URL"
+            )
+        
+        # Check if this video ID already exists in the database
+        existing_content = ContentService(db).get_by_video_id(video_id)
+        if existing_content:
+            logger.info(f"Video ID {video_id} already exists in database, returning existing content")
+            return existing_content
+            
         # Extract transcript and metadata
         transcript = youtube.extract_transcript(video_url)
         if not transcript:
@@ -39,6 +59,9 @@ async def create_youtube_content(
                 status_code=400,
                 detail="Could not extract metadata from video"
             )
+        
+        # Add video_id to metadata for future duplicate checks
+        metadata['video_id'] = video_id
         
         logger.debug(f"Successfully extracted transcript and metadata for video: {video_url}")
         

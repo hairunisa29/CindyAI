@@ -67,7 +67,7 @@ export const useChatStore = defineStore('chat', () => {
     }
   }
 
-  async function sendMessage(message: string): Promise<ChatResponse> {
+  async function sendMessage(message: string, videoId?: string): Promise<ChatResponse> {
     if (!currentChat.value) throw new Error('No active chat')
     
     try {
@@ -89,7 +89,7 @@ export const useChatStore = defineStore('chat', () => {
       }
       
       // Then get assistant's response
-      const response = await chatApi.sendMessage(currentChat.value.id, message)
+      const response = await chatApi.sendMessage(currentChat.value.id, message, videoId)
       
       // Add assistant response with a timestamp that's guaranteed to be after the user's message
       if (currentChat.value) {
