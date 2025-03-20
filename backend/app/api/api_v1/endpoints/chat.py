@@ -49,7 +49,6 @@ async def send_message(
     Send a message in a chat and get AI response.
     Optionally provide a video_id to contextualize the response to a specific video.
     """
-    print("video_id from chat.py endpoints", video_id)
     chat = ChatService(db).get_chat(chat_id)
     if not chat:
         raise HTTPException(
