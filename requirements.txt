@@ -3,3 +3,5 @@ uvicorn
 openai~=1.59.3
 python-dotenv~=1.0.1
 pydantic
+yt-dlp
+requests
