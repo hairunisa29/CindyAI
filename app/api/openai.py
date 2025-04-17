@@ -6,9 +6,9 @@ load_dotenv()
 
 class OpenAIConnector:
     def __init__(self):
-        openai_api_key = os.getenv("OPENAI_API_KEY")
+        self.openai_api_key = os.getenv("OPENAI_API_KEY")
         self.GPT_MODEL = "gpt-4o-mini"
-        self.client = OpenAI(api_key=openai_api_key)
+        self.client = OpenAI(api_key=self.openai_api_key)
         
     async def get_response(self, prompt, system_prompt):
         try:
